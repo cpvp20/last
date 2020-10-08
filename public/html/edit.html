@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Edit Profile</title>
+</head>
+<body>
+
+    <nav class="nav justify-content-end">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/logs">View Logs</a>
+        <a class="nav-link active" href="/edit">Edit my Profile</a>
+        <a class="nav-link" href="/logout">Logout</a>
+      </nav>
+
+    <h1>Edit My Profile</h1>
+    <form action="/edit" method="post">
+        <input id="username" type="text" name="user[username]" placeholder="username">
+        <br>
+        <input type="password" name="user[oldPass]" placeholder="old password">
+        <br>
+        <input type="password" name="user[newPass]" placeholder="new password">
+        <br><br>
+        <button class="btn btn-primary" type="submit">Submit</button>
+
+    </form>
+    <script>
+        const username_input = document.getElementById('username');
+
+        fetch('/user')
+        .then(response => response.json())
+        .then(data => {
+            username_input.value = data.username;
+        })
+    </script>
+</body>
+</html>

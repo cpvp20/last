@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Logs</title>
+</head>
+<body>
+    <nav class="nav justify-content-end">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link active" href="/logs">View Logs</a>
+        <a class="nav-link" href="/edit">Edit my Profile</a>
+        <a class="nav-link" href="/logout">Logout</a>
+      </nav>
+    <h1>5 Most Recent Logins</h1>
+
+    <br>
+    <h3 id="l1"></h3>
+    <br>
+    <h3 id="l2"></h3>
+    <br>
+    <h3 id="l3"></h3>
+    <br>
+    <h3 id="l4"></h3>
+    <br>
+    <h3 id="l5"></h3>
+
+
+    <script>
+        let h1 = document.getElementById('l1');
+        let h2 = document.getElementById('l2');
+        let h3 = document.getElementById('l3');
+        let h4 = document.getElementById('l4');
+        let h5 = document.getElementById('l5');
+
+        fetch('/lastLogin')
+        .then(response => response.json())
+        .then(function(data){
+            if(data.log[0]) h1.textContent = `${new Date(data.log[0].timestamp)}`
+            if(data.log[1]) h2.textContent = `${new Date(data.log[1].timestamp)}`
+            if(data.log[2]) h3.textContent = `${new Date(data.log[2].timestamp)}`
+            if(data.log[3]) h4.textContent = `${new Date(data.log[3].timestamp)}`
+            if(data.log[4]) h5.textContent = `${new Date(data.log[4].timestamp)}`
+            })
+
+    </script>
+</body>
+</html>

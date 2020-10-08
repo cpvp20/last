@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width,initial-scale =1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Firma Documento Web</title>
+</head>
+<body>
+
+    <nav class="nav justify-content-end">
+      <a class="nav-link active" href="/">Home</a>
+      <a class="nav-link" href="/logs">View Logs</a>
+      <a class="nav-link" href="/edit">Edit my Profile</a>
+      <a class="nav-link" href="/logout">Logout</a>
+    </nav>
+    <h1>Home</h1>
+    
+    <div class="card">
+      <div class="card-body">
+
+        <h5 class="card-title">Firma Documento Web</h5>
+    
+    <form action = "fileupload" method="post" enctype="multipart/form-data">
+        <input class="form-control" type="file" name="filetoupload"><br>
+        <input class="btn btn-primary" type="submit">
+    </form>
+    <br>
+    <p>Listed Files:</p>
+    <ul id='files'></ul>
+    
+    <form action="/sign" method="post">
+        <button class="btn btn-primary" type="submit">Sign Files</button>
+    </form>
+
+    <br>
+    
+    <form action="/verify" method="post">
+        <button class="btn btn-primary" type="submit">Verify Files</button>
+    </form>
+
+  </div>
+</div>
+
+    
+    <script>
+      let list_element_in_html = document.getElementById('files');
+
+      fetch('/files')
+        .then(response => response.json())
+        .then(data => displayFiles(data.files));
+
+        
+      function displayFiles(files){
+        for(file of files){
+          let li = document.createElement("li");
+          li.appendChild(document.createTextNode(file));
+          list_element_in_html.appendChild(li);
+        }
+      }
+
+
+    </script>
+</body>
+</html>
